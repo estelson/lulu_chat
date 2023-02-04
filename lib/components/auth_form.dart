@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:lulu_chat/components/user_image_picker.dart';
-import 'package:lulu_chat/models/auth_form_data.dart';
+import 'package:lulu_chat/core/models/auth_form_data.dart';
 import 'package:validatorless/validatorless.dart';
 
 class AuthForm extends StatefulWidget {

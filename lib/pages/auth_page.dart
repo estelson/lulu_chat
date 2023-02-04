@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lulu_chat/components/auth_form.dart';
-import 'package:lulu_chat/models/auth_form_data.dart';
+import 'package:lulu_chat/core/models/auth_form_data.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
