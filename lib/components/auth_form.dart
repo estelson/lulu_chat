@@ -3,7 +3,9 @@ import 'package:lulu_chat/models/auth_form_data.dart';
 import 'package:validatorless/validatorless.dart';
 
 class AuthForm extends StatefulWidget {
-  const AuthForm({Key? key}) : super(key: key);
+  final void Function(AuthFormData) onSubmit;
+
+  const AuthForm({Key? key, required this.onSubmit}) : super(key: key);
 
   @override
   State<AuthForm> createState() => _AuthFormState();
@@ -18,7 +20,7 @@ class _AuthFormState extends State<AuthForm> {
 
     if(!isValid) return;
 
-    
+    widget.onSubmit(_authFormData);
   }
 
   @override
