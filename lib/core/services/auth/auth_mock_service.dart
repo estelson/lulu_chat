@@ -4,8 +4,11 @@ import 'package:lulu_chat/core/models/chat_user.dart';
 import 'package:lulu_chat/core/services/auth/auth_service.dart';
 
 class AuthMockService implements AuthService {
+  static Map<String, ChatUser> _users = {};
+  static ChatUser? _currentUser;
+
   ChatUser? get getCurrentUser {
-    return null;
+    return _currentUser;
   }
 
   Stream<ChatUser?> get getUserChanges {}
