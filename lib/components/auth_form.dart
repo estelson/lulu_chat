@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lulu_chat/models/auth_form_data.dart';
+import 'package:validatorless/validatorless.dart';
 
 class AuthForm extends StatefulWidget {
   const AuthForm({Key? key}) : super(key: key);
@@ -13,7 +14,11 @@ class _AuthFormState extends State<AuthForm> {
   final _authFormData = AuthFormData();
 
   void _submit() {
-    _formKey.currentState?.validate();
+    final isValid = _formKey.currentState!.validate() ?? false;
+
+    if(!isValid) return;
+
+    
   }
 
   @override
@@ -32,12 +37,21 @@ class _AuthFormState extends State<AuthForm> {
                   initialValue: _authFormData.name,
                   onChanged: (name) => _authFormData.name = name,
                   decoration: InputDecoration(labelText: "Nome"),
+                  validator: Validatorless.multiple([
+                    Validatorless.required("O campo 'Nome' é obrigatório"),
+                    Validatorless.min(5, "O campo 'Nome' deve conter no mínimo 5 caracteres"),
+                    Validatorless.max(50, "O campo 'Nome' deve conter no máximo 50 caracteres"),
+                  ]),
                 ),
               TextFormField(
                 key: ValueKey("email"),
                 initialValue: _authFormData.email,
                 onChanged: (email) => _authFormData.email = email,
                 decoration: InputDecoration(labelText: "e-Mail"),
+                validator: Validatorless.multiple([
+                  Validatorless.required("O campo 'e-Mail' é obrigatório"),
+                  Validatorless.email("e-Mail inválido"),
+                ]),
               ),
               TextFormField(
                 key: ValueKey("password"),
@@ -45,6 +59,10 @@ class _AuthFormState extends State<AuthForm> {
                 onChanged: (password) => _authFormData.password = password,
                 obscureText: true,
                 decoration: InputDecoration(labelText: "Senha"),
+                validator: Validatorless.multiple([
+                  Validatorless.required("O campo 'Senha' é obrigatório"),
+                  Validatorless.min(6, "O campo 'Senha' deve conter no mínimo 6 caracteres"),
+                ]),
               ),
               SizedBox(height: 12),
               ElevatedButton(
