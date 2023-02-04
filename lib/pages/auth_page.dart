@@ -12,13 +12,23 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   bool _isLoading = false;
 
-  void _handleSubmit(AuthFormData authFormData) {
-    setState(() => _isLoading = true);
+  Future<void> _handleSubmit(AuthFormData authFormData) async{
+    try {
+      setState(() => _isLoading = true);
 
-    debugPrint("AuthPage...");
-    debugPrint(authFormData.email);
+      if(authFormData.isLogin) {
+        // login
+      } else {
+        // Signup
+      }
+    } on Exception catch (e) {
+      // TODO: tratar o erro
+    } finally {
+      setState(() => _isLoading = false);
+    }
 
-    setState(() => _isLoading = false);
+    // debugPrint("AuthPage...");
+    // debugPrint(authFormData.email);
   }
 
   @override
