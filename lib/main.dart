@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lulu_chat/pages/auth_page.dart';
+import 'package:lulu_chat/core/services/auth/auth_or_app_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,14 +18,14 @@ class MyApp extends StatelessWidget {
           secondary: Colors.white,
           error: Colors.red,
         ),
-        canvasColor: Color.fromRGBO(214, 234, 241, 1.0),
+        // canvasColor: Color.fromRGBO(220, 234, 255, 1.0),
         textTheme: ThemeData.light().textTheme.copyWith(
               titleLarge: TextStyle(
                 fontSize: 20,
               ),
             ),
       ),
-      home: AuthPage(),
+      home: AuthOrAppPage(),
       debugShowCheckedModeBanner: false,
     );
   }
