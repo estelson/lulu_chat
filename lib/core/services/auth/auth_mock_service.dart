@@ -6,7 +6,7 @@ import 'package:lulu_chat/core/models/chat_user.dart';
 import 'package:lulu_chat/core/services/auth/auth_service.dart';
 
 class AuthMockService implements AuthService {
-  static final _defaultUser = ChatUser(id: "1", name: "Teste", email: "teste@teste.com", imageUrl: "assets/images/avatar.png");
+  static final _defaultUser = ChatUser(id: "456", name: "Jack", email: "jack@teste.com", imageUrl: "assets/images/avatar.png");
 
   static Map<String, ChatUser> _users = {
     _defaultUser.email: _defaultUser,
