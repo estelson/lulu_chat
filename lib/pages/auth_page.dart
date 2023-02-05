@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lulu_chat/components/auth_form.dart';
 import 'package:lulu_chat/core/models/auth_form_data.dart';
-import 'package:lulu_chat/core/services/auth/auth_mock_service.dart';
+import 'package:lulu_chat/core/services/auth/auth_service.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -19,10 +19,10 @@ class _AuthPageState extends State<AuthPage> {
 
       if (authFormData.isLogin) {
         // login
-        await AuthMockService().login(authFormData.email, authFormData.password);
+        await AuthService().login(authFormData.email, authFormData.password);
       } else {
         // Signup
-        await AuthMockService().signup(authFormData.name, authFormData.email, authFormData.password, authFormData.image);
+        await AuthService().signup(authFormData.name, authFormData.email, authFormData.password, authFormData.image);
       }
     } on Exception catch (e) {
       // TODO: tratar o erro
