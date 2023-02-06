@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lulu_chat/core/services/auth/auth_or_app_page.dart';
+import 'package:lulu_chat/pages/auth_or_app_page.dart';
 import 'package:lulu_chat/core/services/notification/chat_notification_service.dart';
 import 'package:provider/provider.dart';
 

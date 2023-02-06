@@ -4,6 +4,10 @@ import 'package:lulu_chat/core/models/chat_notification.dart';
 class ChatNotificationService with ChangeNotifier {
   List<ChatNotification> _items = [];
 
+  int get getItemsCount {
+    return _items.length;
+  }
+
   List<ChatNotification> get getItems {
     return [..._items];
   }
