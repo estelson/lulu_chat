@@ -83,19 +83,18 @@ class ChatPage extends StatelessWidget {
           ],
         ),
       ),
-      // body: Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Text("Chat page"),
-      //       TextButton(
-      //         onPressed: () {
-      //           AuthService().logout();
-      //         },
-      //         child: Text("Logout"),
-      //       ),
-      //     ],
-      //   ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Theme.of(context).colorScheme.primary,
+      //   child: Icon(Icons.add),
+      //   onPressed: () {
+      //     Provider.of<ChatNotificationService>(
+      //       context,
+      //       listen: false,
+      //     ).add(ChatNotification(
+      //       title: "Mais uma notificação!",
+      //       body: Random().nextDouble().toString(),
+      //     ),);
+      //   },
       // ),
     );
   }
