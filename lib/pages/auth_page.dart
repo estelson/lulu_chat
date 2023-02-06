@@ -27,6 +27,8 @@ class _AuthPageState extends State<AuthPage> {
     } on Exception catch (e) {
       // TODO: tratar o erro
     } finally {
+      if (!mounted) return;
+
       setState(() => _isLoading = false);
     }
 
