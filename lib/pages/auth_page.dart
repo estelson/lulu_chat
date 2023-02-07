@@ -31,9 +31,6 @@ class _AuthPageState extends State<AuthPage> {
 
       setState(() => _isLoading = false);
     }
-
-    // debugPrint("AuthPage...");
-    // debugPrint(authFormData.email);
   }
 
   @override

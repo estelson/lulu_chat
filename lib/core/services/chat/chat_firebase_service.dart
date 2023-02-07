@@ -14,7 +14,7 @@ class ChatFirebaseService implements ChatService {
     final store = FirebaseFirestore.instance;
 
     // Transforma ChatMessage => Map<String, dynamic> para ser enviado ao Firebase Firestore
-    store.collection("chat").add({
+    final docRef = await store.collection("chat").add({
       "text": text,
       "createdAt": DateTime.now().toIso8601String(),
       "userId": user.id,
@@ -22,19 +22,17 @@ class ChatFirebaseService implements ChatService {
       "userImageUrl": user.imageUrl,
     });
 
-    return null;
-  }
+    // Transforma Map<String, dynamic> do Firebase Firestore => ChatMessage para ser apresentada a msg no chat
+    final doc = await docRef.get();
+    final data = doc.data()!;
 
-// final newMessage = ChatMessage(
-//       id: Random().nextDouble().toString(),
-//       text: text,
-//       createdAt: DateTime.now(),
-//       userId: user.id,
-//       userName: user.name,
-//       userImageUrl: user.imageUrl,
-//     );
-//
-//     _msgs.add(newMessage);
-//
-//     _controller?.add(_msgs.reversed.toList());
+    return ChatMessage(
+      id: doc.id,
+      text: data["text"],
+      createdAt: DateTime.parse(data["createdAt"]),
+      userId: data["userId"],
+      userName: data["userName"],
+      userImageUrl: data["userImageUrl"],
+    );
+  }
 }
