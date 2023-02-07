@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lulu_chat/core/models/chat_message.dart';
@@ -10,10 +9,13 @@ class ChatFirebaseService implements ChatService {
   Stream<List<ChatMessage>> messagesStream() {
     final store = FirebaseFirestore.instance;
 
-    final snapshots = store.collection("chat").withConverter(
+    final snapshots = store
+        .collection("chat")
+        .withConverter(
           fromFirestore: _fromFirestore,
           toFirestore: _toFirestore,
-        ).snapshots();
+        ).orderBy("createdAt", descending: true)
+        .snapshots();
 
     return snapshots.map((snapshot) {
       return snapshot.docs.map((doc) {
@@ -68,7 +70,7 @@ class ChatFirebaseService implements ChatService {
       "text": msg.text,
       "createdAt": msg.createdAt.toIso8601String(),
       "userId": msg.userId,
-      "userName": msg.text,
+      "userName": msg.userName,
       "userImageUrl": msg.userImageUrl,
     };
   }
