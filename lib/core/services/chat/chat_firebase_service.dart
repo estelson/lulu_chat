@@ -22,7 +22,6 @@ class ChatFirebaseService implements ChatService {
       "userImageUrl": user.imageUrl,
     });
 
-    // Transforma Map<String, dynamic> do Firebase Firestore => ChatMessage para ser apresentada a msg no chat
     final doc = await docRef.get();
     final data = doc.data()!;
 
@@ -33,6 +32,23 @@ class ChatFirebaseService implements ChatService {
       userId: data["userId"],
       userName: data["userName"],
       userImageUrl: data["userImageUrl"],
+    );
+  }
+
+  /**
+   * Transforma Map<String, dynamic> do Firebase Firestore => ChatMessage para ser apresentada a msg no chat
+   */
+  ChatMessage _fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> doc,
+    SnapshotOptions? options,
+  ) {
+    return ChatMessage(
+      id: doc.id,
+      text: doc["text"],
+      createdAt: DateTime.parse(doc["createdAt"]),
+      userId: doc["userId"],
+      userName: doc["userName"],
+      userImageUrl: doc["userImageUrl"],
     );
   }
 }
