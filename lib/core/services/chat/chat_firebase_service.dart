@@ -13,7 +13,6 @@ class ChatFirebaseService implements ChatService {
   Future<ChatMessage?> save(String text, ChatUser user) async {
     final store = FirebaseFirestore.instance;
 
-    // Transforma ChatMessage => Map<String, dynamic> para ser enviado ao Firebase Firestore
     final docRef = await store.collection("chat").add({
       "text": text,
       "createdAt": DateTime.now().toIso8601String(),
@@ -33,6 +32,22 @@ class ChatFirebaseService implements ChatService {
       userName: data["userName"],
       userImageUrl: data["userImageUrl"],
     );
+  }
+
+  /**
+   * Transforma ChatMessage => Map<String, dynamic> para ser enviado ao Firebase Firestore
+   */
+  Map<String, dynamic> _toFirestore(
+    ChatMessage msg,
+    SetOptions? options,
+  ) {
+    return {
+      "text": msg.text,
+      "createdAt": msg.createdAt.toIso8601String(),
+      "userId": msg.userId,
+      "userName": msg.text,
+      "userImageUrl": msg.userImageUrl,
+    };
   }
 
   /**
