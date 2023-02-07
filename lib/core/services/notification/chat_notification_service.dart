@@ -27,9 +27,9 @@ class ChatNotificationService with ChangeNotifier {
 
   // Push notification
   Future<void> init() async {
+    _configureTerminated();
     _configureForeground();
     _configureBackground();
-    _configureTerminated();
   }
 
   Future<bool> get _isAuthorized async {
@@ -37,6 +37,13 @@ class ChatNotificationService with ChangeNotifier {
     final settings = await messaging.requestPermission();
 
     return settings.authorizationStatus == AuthorizationStatus.authorized;
+  }
+
+  Future<void> _configureTerminated() async {
+    if (await _isAuthorized) {
+      RemoteMessage? initialMsg = await FirebaseMessaging.instance.getInitialMessage();
+      _messageHandler(initialMsg);
+    }
   }
 
   Future<void> _configureForeground() async {
@@ -48,13 +55,6 @@ class ChatNotificationService with ChangeNotifier {
   Future<void> _configureBackground() async {
     if (await _isAuthorized) {
       FirebaseMessaging.onMessageOpenedApp.listen(_messageHandler);
-    }
-  }
-
-  Future<void> _configureTerminated() async {
-    if (await _isAuthorized) {
-      RemoteMessage? initialMsg = await FirebaseMessaging.instance.getInitialMessage();
-      _messageHandler(initialMsg);
     }
   }
 
